@@ -1,0 +1,64 @@
+<div class="container my-5 d-flex justify-content-center">
+  <div class="w-100" style="max-width: 900px;">
+    <h2 class="text-center mb-4">Pencapaian Karyawan</h2>
+
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>No</th>
+          <th>Nama Karyawan</th>
+          <th>Target</th>
+          <th>Output</th>
+          <th>Pencapaian (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let k of karyawanList; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ k.nama }}</td>
+          <td>{{ k.target | number }}</td>
+          <td>{{ k.output | number }}</td>
+          <td>{{ k.pencapaian | number : '1.2-2' }}%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-center mt-5">Grafik Pencapaian Karyawan</h3>
+    <div class="w-100">
+      <canvas #barChartCanvas style="width: 100%; height: 400px;"></canvas>
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-danger" (click)="kirimNotifikasi()">
+        Notifikasi Operator (≤ 50%)
+      </button>
+    </div>
+
+    <div class="text-center mt-5">
+  <h4>Scan QR untuk lihat detail produk</h4>
+  <div class="d-flex flex-wrap justify-content-center gap-4 mt-3">
+    <div>
+      <app-qr-code [data]="'/produk/1'"></app-qr-code>
+      <div>Indomie Kari</div>
+    </div>
+    <div>
+      <app-qr-code [data]="'/produk/2'"></app-qr-code>
+      <div>Indomie Soto</div>
+    </div>
+    <div>
+      <app-qr-code [data]="'/produk/3'"></app-qr-code>
+      <div>Indomie Goreng</div>
+    </div>
+    <div>
+      <app-qr-code [data]="'/produk/4'"></app-qr-code>
+      <div>Sarimi</div>
+    </div>
+    <div>
+      <app-qr-code [data]="'/produk/5'"></app-qr-code>
+      <div>Supermi</div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
