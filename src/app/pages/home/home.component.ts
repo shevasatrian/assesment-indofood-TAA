@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { QrCodeComponent } from '../../qr-code/qr-code.component';
 import { NgChartsModule } from 'ng2-charts';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser  } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import emailjs from 'emailjs-com';
 import { Chart } from 'chart.js';
@@ -46,39 +46,41 @@ export class HomeComponent implements AfterViewInit {
   })).sort((a, b) => b.pencapaian - a.pencapaian);
 
   ngAfterViewInit(): void {
-    const labels = this.karyawanList.map(k => k.nama);
-    const data = this.karyawanList.map(k => parseFloat(k.pencapaian.toFixed(2)));
+    if (isPlatformBrowser(this.platformId)) {
+      const labels = this.karyawanList.map(k => k.nama);
+      const data = this.karyawanList.map(k => parseFloat(k.pencapaian.toFixed(2)));
 
-    new Chart(this.barChartCanvas.nativeElement, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Pencapaian (%)',
-          data,
-          backgroundColor: '#42A5F5'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 120
-          }
+      new Chart(this.barChartCanvas.nativeElement, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Pencapaian (%)',
+            data,
+            backgroundColor: '#42A5F5'
+          }]
         },
-        plugins: {
-          legend: {
-            position: 'top'
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 120
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top'
+            }
           }
         }
-      }
-    });
+      });
+    }
   }
 
-  constructor() {
-    // Hitung persentase pencapaian dan urutkan
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    // Hitung pencapaian seperti biasa
     this.karyawanList = this.karyawanList
       .map(k => ({
         ...k,
