@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/tugas-programming-indofood",
-            "baseHref": "/assesment-indofood-TAA/",
+            "baseHref": "/tugas-programming-indofood/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
