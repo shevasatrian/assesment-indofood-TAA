@@ -2,6 +2,7 @@
   "name": "tugas-programming-indofood",
   "version": "0.0.0",
   "scripts": {
+    "vercel-build": "npm install --force && npm run build",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
