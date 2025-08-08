@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "vercel-build": "npm install --force && npm run build",
+    "postinstall": "npm install --legacy-peer-deps || true",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
